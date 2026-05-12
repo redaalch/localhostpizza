@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>localhostpizza</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0f172a;
+        --card: #111827;
+        --accent: #f97316;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: Arial, Helvetica, sans-serif;
+        background: radial-gradient(circle at top, #1e293b, var(--bg));
+        color: var(--text);
+      }
+      .card {
+        width: min(720px, calc(100% - 32px));
+        padding: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        background: rgba(17, 24, 39, 0.9);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        text-align: center;
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 6vw, 4rem);
+        color: #fff;
+      }
+      p {
+        margin: 0 0 24px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 20px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>localhostpizza</h1>
+      <p>Fresh, simple, and ready for your next pizza project.</p>
+      <a class="btn" href="#">Order Now</a>
+    </main>
+  </body>
+  <script>
+    let ws;
+    const proto = window.location.protocol === "https" ? "wss" : "ws";
+    ws = new WebSocket(` ${proto}://${window.location.host}`);
+
+    ws.onmessage = (event) => {
+      console.log(event.data);
+    };
+  </script>
+</html>
